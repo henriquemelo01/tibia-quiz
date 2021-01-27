@@ -18,7 +18,7 @@ const Widget = styled.div`
     font-size: 16px;
     font-weight: 700;
     line-height: 1;
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
   }
   p {
     font-size: 14px;
@@ -54,26 +54,37 @@ Widget.Content = styled.div`
 `;
 
 Widget.Input = styled.input`
-  margin: 1px 1px 1rem 1px;
-  padding: 0.5rem 3rem;
+  margin: 1px 1px 0.5rem 1px;
+  /* padding: 0.5rem 4rem; */
 
 
   background: none;
   border: #6200EE solid 1px;
   border-radius: 3.5px;
-
+  width: 100%;
+  height: 32px;
+  font-size: 14px;
   color: white;
   text-align: left;
+  text-indent: 8px;
 `
 
 Widget.Button = styled.button`
-  padding: 0.5rem 7.3rem;
+  margin: 0.5rem 0 0.5rem 0;
+  width: 100%;
+  height: 32px;
+  border: #ede7f6 solid 1px;
   background: #979797;
   border-radius: 0.25rem;
   text-align: center;
   line-height: 16px;
   font-size: 14px;
   color: #FFFFFF;
+  opacity: .85;
+  &:hover,
+    &:focus{
+    opacity: 1;
+  }
 
 `
 

@@ -1,18 +1,19 @@
 {
   "bg": "https://i.redd.it/evmkcfq9gln51.jpg",
+  "quizImg" : "https://ambrosia.com.br/wp-content/uploads/2020/11/harry-potter-todos-filmes-streaming-hbo-max-noticias-revista-ambrosia.jpg",
   "title": "Titulo do Quiz",
   "description": "Teste seus conhecimentos sobre o mundo mágico de Hogwards",
   "questions": [
     {
       "image": "https://placehold.it/400x400",
       "title": "Questão Número 1",
-      "description": "Descriçao da questão número #1",
+      "description": "Com Quantos anos Harry Potter foi para Hogwards ?",
       "answer": 1,
       "alternatives": [
-        "Alternativa A",
-        "Alternativa B",
-        "Alternativa C",
-        "Alternativa D"
+        "10",
+        "11",
+        "12",
+        "13"
       ]
     }
   ],
