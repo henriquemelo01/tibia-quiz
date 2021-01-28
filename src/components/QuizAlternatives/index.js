@@ -38,15 +38,16 @@ const alternatives = function (question) {
 */
 
 
-const alternatives2 = function (question,statusQuiz, indexBtnClick) {
+const alternatives2 = function (question,statusQuiz, correctAnswer,userAnswer) {
   const status = statusQuiz;
   return (question.alternatives.map((alternative,alternativeId) => {
     // Index Btn para renderizar um elemento de cor diferente
     if (statusQuiz === "Playing")
       return <Alternative id = {alternativeId} type = "submit">{alternative}</Alternative>
     
+    // correctAnswer = alternativeNum  
     if (statusQuiz === "Acerto") {
-      if (indexBtnClick === alternativeId){
+      if (userAnswer === alternativeId){
         return <Alternative style = {{ background: "green" }} id = {alternativeId} type = "submit">{alternative}</Alternative>
       } else {
         return <Alternative disabled = {true} id = {alternativeId} type = "submit">{alternative}</Alternative>
@@ -54,10 +55,11 @@ const alternatives2 = function (question,statusQuiz, indexBtnClick) {
     }
 
     if (statusQuiz === "Erro") {
-      if (indexBtnClick === alternativeId){
-        return <Alternative style = {{ background: "green" }} id = {alternativeId} type = "submit">{alternative}</Alternative>
-      } else {
-        return <Alternative style = {{ background: "red" }} disabled = {true} id = {alternativeId} type = "submit">{alternative}</Alternative>
+      if (userAnswer === alternativeId){
+        return <Alternative style = {{ background: "red" }} id = {alternativeId} type = "submit">{alternative}</Alternative>
+      }
+        else {
+          return <Alternative disabled = {true} id = {alternativeId} type = "submit">{alternative}</Alternative>
       }
     }
   })
@@ -65,8 +67,6 @@ const alternatives2 = function (question,statusQuiz, indexBtnClick) {
 }
   
   
-
-
 // Criando Component usando ES6 class -- Forma + Antiga de "criar" Components
 class Alternatives extends React.Component {
     render() {
@@ -74,7 +74,7 @@ class Alternatives extends React.Component {
             <div>
                 {/* Quando passo um array de components como parâmetro, o react dom renderiza um por um {} só pode co nter estruturas que retornam algo ex function, array,var.*/}
                 {/* {alternatives(this.props.question)} */}
-                {alternatives2(this.props.question, this.props.statusQuiz, this.props.answerIndex)}
+                {alternatives2(this.props.question, this.props.statusQuiz, this.props.answerIndex, this.props.userAnswer)}
             </div>
         )
     }

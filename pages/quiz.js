@@ -29,6 +29,8 @@ function Quiz () {
   const totalQuestions = db.questions.length;
   const [statusQuiz, setStatusQuiz] = React.useState("Playing"); // "Playing", Acerto , Erro 
   let alternatives;
+  let alternativeNum;
+  const [userAnswer, setUserAnswer] = React.useState();
 
   return (
     <div>
@@ -44,7 +46,8 @@ function Quiz () {
                 // Id evento de click no botão 
                 const alternative = e.target.closest("button");
                 if (!alternative) return;
-                const alternativeNum = Number(alternative.getAttribute("id"));
+                alternativeNum = Number(alternative.getAttribute("id"));
+                setUserAnswer(alternativeNum);
                 console.log(alternativeNum === answerIndex);
                 if (statusQuiz !== "Playing") return;    
                 
@@ -59,7 +62,8 @@ function Quiz () {
               
              }}>
                 <h1>{question.description}</h1>
-                <Alternatives question = {question} statusQuiz = {statusQuiz} answerIndex = {answerIndex} />
+                {/* answerInder = correctAnswer  */}
+                <Alternatives question = {question} statusQuiz = {statusQuiz} answerIndex = {answerIndex} userAnswer = {userAnswer}/>
                 {/* Renderizar Botão quando o jogador selecionar  */}
                 {(statusQuiz !== "Playing" && (indexQuestion + 1 < totalQuestions)) && <button onClick = {(e) => {
                   e.preventDefault();
