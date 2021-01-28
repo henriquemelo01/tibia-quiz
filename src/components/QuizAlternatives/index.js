@@ -1,23 +1,14 @@
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable max-len */
-/* eslint-disable quotes */
-/* eslint-disable import/extensions */
-/* eslint-disable import/order */
-/* eslint-disable semi */
-/* eslint-disable max-len */
-
 import React from "react";
 import styled from "styled-components";
-import db from "../../../db.json";
-import Widget from "../Widget/index.js"
+
 
 const Alternative = styled.button`
   margin: 0.5rem 0 0.5rem 0;
   width: 100%;
   height: 32px;
   border: #221266 solid 1px;
-  background: linear-gradient(#0e4686,#221266 )
-;
+  background: linear-gradient(#0e4686,#221266 );
+
   border-radius: 0.25rem;
   text-align: center;
   line-height: 16px;
@@ -37,11 +28,46 @@ const Alternative = styled.button`
 const alternatives = function (question) {
   return question.alternatives.map((alternative,alternativeId) => <Alternative id = {alternativeId} type = "submit">{alternative}</Alternative>);
 } 
+ 
+/*
+  Checar resposta: 
+  1) Passar index do botão clicado
+  2) Teste + Renderizar 
+    - Se indexClicado === question.answer && <Button state = "Acerto" /> 
+    - Se indexClicado !== question.answer && <Buton state = "Errou" />
+  3) Desabilitar todos os demais botões; Reenderizar, passando statusBtnClicked = {true}
+
+
+*/
+
+
+const alternatives2 = function (question,statusQuiz, indexBtnClick) {
+  const status = statusQuiz;
+  return (question.alternatives.map((alternative,alternativeId) => {
+    // Index Btn para renderizar um elemento de cor diferente
+    if (statusQuiz === "Playing")
+      return <Alternative id = {alternativeId} type = "submit">{alternative}</Alternative>
+    
+    if (statusQuiz === "Acerto") {
+      if (indexBtnClick === alternativeId){
+        return <Alternative style = {{ background: "green" }} id = {alternativeId} type = "submit">{alternative}</Alternative>
+      } else {
+        return <Alternative disabled = {true} id = {alternativeId} type = "submit">{alternative}</Alternative>
+      }
+    }
+
+    if (statusQuiz === "Erro") {
+      if (indexBtnClick === alternativeId){
+        return <Alternative style = {{ background: "green" }} id = {alternativeId} type = "submit">{alternative}</Alternative>
+      } else {
+        return <Alternative style = {{ background: "red" }} disabled = {true} id = {alternativeId} type = "submit">{alternative}</Alternative>
+      }
+    }
+  })
+  )
+}
   
-
-
-// const alternatives = db.questions.map((question,i) => question.alternatives.map((alternative) => <Alternative>{alternative}</Alternative>));
-
+  
 
 
 // Criando Component usando ES6 class -- Forma + Antiga de "criar" Components
@@ -49,8 +75,9 @@ class Alternatives extends React.Component {
     render() {
         return (
             <div>
-                {/* Quando passo um array de components como parâmetro, o react dom renderiza um por um {} só pode conter estruturas que retornam algo ex function, array,var.*/}
-                {alternatives(this.props.question)}
+                {/* Quando passo um array de components como parâmetro, o react dom renderiza um por um {} só pode co nter estruturas que retornam algo ex function, array,var.*/}
+                {/* {alternatives(this.props.question)} */}
+                {alternatives2(this.props.question, this.props.statusQuiz, this.props.answerIndex)}
             </div>
         )
     }
