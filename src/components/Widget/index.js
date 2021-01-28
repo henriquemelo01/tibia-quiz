@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 // OBS: (theme) => the.clors.primary recebe o componente "instanciado". A call back acessa as keys do json
 
+// Sections 
 const Widget = styled.div`
   margin-top: 24px;
   margin-bottom: 24px;
@@ -52,40 +53,5 @@ Widget.Content = styled.div`
     padding: 0;
   }
 `;
-
-Widget.Input = styled.input`
-  margin: 1px 1px 0.5rem 1px;
-  /* padding: 0.5rem 4rem; */
-
-
-  background: none;
-  border: #6200EE solid 1px;
-  border-radius: 3.5px;
-  width: 100%;
-  height: 32px;
-  font-size: 14px;
-  color: white;
-  text-align: left;
-  text-indent: 8px;
-`
-
-Widget.Button = styled.button`
-  margin: 0.5rem 0 0.5rem 0;
-  width: 100%;
-  height: 32px;
-  border: #ede7f6 solid 1px;
-  background: #979797;
-  border-radius: 0.25rem;
-  text-align: center;
-  line-height: 16px;
-  font-size: 14px;
-  color: #FFFFFF;
-  opacity: .85;
-  &:hover,
-    &:focus{
-    opacity: 1;
-  }
-
-`
 
 export default Widget;

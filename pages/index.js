@@ -1,11 +1,21 @@
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable quotes */
+/* eslint-disable import/extensions */
+/* eslint-disable import/order */
+/* eslint-disable semi */
+/* eslint-disable max-len */
 import styled from "styled-components";
 import db from "../db.json"
 import QuizBackground from "../src/components/QuizBackground/index.js"
 import Widget from "../src/components/Widget/index.js";
 import QuizLogo from "../src/components/QuizLogo/index.js";
+import QuizContainer from "../src/components/QuizContainer/index.js";
 import GitHubCorner from "../src/components/GitHubCorner/index.js"
 import Footer from "../src/components/Footer/index.js"
 import { useRouter } from "next/router"
+import Input from "../src/components/Input/index.js"
+import Button from "../src/components/Button/index.js"
 
 
 // import { delBasePath } from "next/dist/next-server/lib/router/router";
@@ -17,8 +27,10 @@ const Title = styled.h1`
   color: ${({ theme }) => theme.colors.primary};
 `;
 
+// eslint-disable-next-line max-len
 // Funções no react representam os componentes - Home = homepage , elas precisam ser declaradas com primeira letra maiuscula, como se fossem constructores. Essas funções recebem como parâmetro as propriedades do component = props.
 
+// eslint-disable-next-line max-len
 // Associação: Os constructores quando são chamados com o new, cria um {} e o this do constructor aponta para este objeto vazio, em seguida o prototype do objeto vazio é linkado ao Constructor.prototype que é um outro objeto que contém todos os metodos que serão herdados via prototype chain. Na associação com os constructores as funções components, criam um elemento html vazio, this -> novo html, html herda propriedades  e metodos do seu "constructor" há um retorno dessa tag
 
 // function Title(props) {
@@ -26,16 +38,6 @@ const Title = styled.h1`
 //   return <h1>{props.children}</h1>;
 // }
 
-export const QuizContainer = styled.div`
-  width: 100%;
-  max-width: 350px;
-  padding-top: 45px;
-  margin: auto 10%;
-  @media screen and (max-width: 500px) {
-    margin: auto;
-    padding: 15px;
-  }
-`;
 
 export default function Home() {
   // Hooks: São formas que o react da para agente acessar informações e coisas que ocorrem no react quando um dado é pego ou modificado no servidor 
@@ -65,7 +67,7 @@ export default function Home() {
               router.push(`/quiz?name=${name}`);
 
             }}>  
-              <Widget.Input placeholder = "Diz ai seu nome para jogar :)" onChange = {function (e) {
+              <Input name = "username" value = {name} placeholder = "Diz ai seu nome para jogar :)" onChange = {function (e) {
                 
                 // Novo Estado - React verifica se houve modificação, se houver renderiza o novo estado
                 setName(e.target.value);
@@ -74,8 +76,8 @@ export default function Home() {
                 // btn.textContent = `Jogar ${name}`
               
               }}/>
-              <Widget.Button disabled = {name.length === 0}>Jogar 
-               {` ${name}`}</Widget.Button>
+              <Button disabled = {name.length === 0}>Jogar 
+               {` ${name}`}</Button>
             </form>
           </Widget.Content>
         </Widget>
@@ -92,3 +94,21 @@ export default function Home() {
     </QuizBackground>
   );
 }
+
+// No React não podemos renderizar um mesmo tag/elemento em um mesmo nível, assim é comum 
+
+/*
+
+function Input() {
+  return (
+    <div>
+      <InputBase/>
+    </div>
+    // Não é possivel renderizar duas divs em um mesmo nível no render
+    <div>
+    
+    </div>
+  )
+}
+
+*/

@@ -1,3 +1,11 @@
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable max-len */
+/* eslint-disable quotes */
+/* eslint-disable import/extensions */
+/* eslint-disable import/order */
+/* eslint-disable semi */
+/* eslint-disable max-len */
+
 // Este arquivo contém códigos/dados que vão estar presentes em todas as páginas - SETUP
 
 import React from "react";
@@ -33,6 +41,7 @@ const theme = db.theme;
 
 // Theme provide
 export default function App({ Component, pageProps }) {
+  console.log(pageProps)
   return (
     <>
       <Head>

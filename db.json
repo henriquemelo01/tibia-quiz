@@ -1,23 +1,34 @@
 {
   "bg": "https://i.redd.it/evmkcfq9gln51.jpg",
-  "quizImg" : "https://ambrosia.com.br/wp-content/uploads/2020/11/harry-potter-todos-filmes-streaming-hbo-max-noticias-revista-ambrosia.jpg",
   "title": "Titulo do Quiz",
   "description": "Teste seus conhecimentos sobre o mundo mágico de Hogwards",
   "questions": [
     {
-      "image": "https://placehold.it/400x400",
-      "title": "Questão Número 1",
+      "image": "https://ambrosia.com.br/wp-content/uploads/2020/11/harry-potter-todos-filmes-streaming-hbo-max-noticias-revista-ambrosia.jpg",
+      "title": "Pergunta 1",
       "description": "Com Quantos anos Harry Potter foi para Hogwards ?",
-      "answer": 1,
+      "answer": 2,
       "alternatives": [
         "10",
         "11",
         "12",
         "13"
       ]
+    },
+    {
+      "image": "https://media.giphy.com/media/13FrpeVH09Zrb2/giphy.gif",
+      "title": "Como fazer um background gradiente com css?",
+      "description": "Faz tempo em haha",
+      "answer": 0,
+      "alternatives": [
+         "background: linear-gradient(#e66465, #9198e5);",
+         "background: gradient(#e66465, #9198e5);"
+      ]
     }
   ],
-  "external": [""],
+  "external": [
+    ""
+  ],
   "theme": {
     "colors": {
       "primary": "#0d47a1",
