@@ -28,6 +28,7 @@ function Quiz () {
   const answerIndex = question.answer;
   const totalQuestions = db.questions.length;
   const [statusQuiz, setStatusQuiz] = React.useState("Playing"); // "Playing", Acerto , Erro 
+  let alternatives;
 
   return (
     <div>
@@ -38,20 +39,35 @@ function Quiz () {
         <Widget.Content>
             <form onClick = {function (e) {
                 e.preventDefault();
-                const alternatives = e.target.closest("form").querySelectorAll("button");
-                alternatives.forEach((alternative) => alternative.setAttribute("disabled", true))
+                alternatives = e.target.closest("form").querySelectorAll("button");
+        
+                // Id evento de click no botão 
                 const alternative = e.target.closest("button");
                 if (!alternative) return;
-                const alternativeNum = Number(e.target.getAttribute("id"));
+                const alternativeNum = Number(alternative.getAttribute("id"));
+                console.log(alternativeNum === answerIndex);
+                if (statusQuiz !== "Playing") return;    
+                
+                // Se jogador Estiver jogando ou seja não selecionou nenhuma alternativa
                 if (alternativeNum === answerIndex)
+                {
                   setStatusQuiz("Acerto")
+                }
                 
                 if (alternativeNum !== answerIndex)
-                setStatusQuiz("Erro")
-
+                setStatusQuiz("Erro");
+              
              }}>
                 <h1>{question.description}</h1>
                 <Alternatives question = {question} statusQuiz = {statusQuiz} answerIndex = {answerIndex} />
+                {/* Renderizar Botão quando o jogador selecionar  */}
+                {(statusQuiz !== "Playing" && (indexQuestion + 1 < totalQuestions)) && <button onClick = {(e) => {
+                  e.preventDefault();
+                  setIndex(indexQuestion + 1);
+                  setStatusQuiz("Playing");
+                  if (!alternatives) return ;
+                  alternatives.forEach((alternative) => alternative.setAttribute("disabled", false))
+                }}>Next</button>}
             </form>
         </Widget.Content>
     </div>

@@ -1,3 +1,4 @@
+  
 import React from "react";
 import styled from "styled-components";
 
@@ -8,7 +9,6 @@ const Alternative = styled.button`
   height: 32px;
   border: #221266 solid 1px;
   background: linear-gradient(#0e4686,#221266 );
-
   border-radius: 0.25rem;
   text-align: center;
   line-height: 16px;
@@ -19,7 +19,6 @@ const Alternative = styled.button`
     &:focus{
     opacity: 1;
   }
-
 `
 // Percorre todas as atlernativas das questões e retorna um componente (Alternative) para cada uma delas 
 
@@ -36,8 +35,6 @@ const alternatives = function (question) {
     - Se indexClicado === question.answer && <Button state = "Acerto" /> 
     - Se indexClicado !== question.answer && <Buton state = "Errou" />
   3) Desabilitar todos os demais botões; Reenderizar, passando statusBtnClicked = {true}
-
-
 */
 
 
