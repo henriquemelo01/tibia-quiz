@@ -1,33 +1,35 @@
 {
-  "bg": "https://i.redd.it/evmkcfq9gln51.jpg",
+  "bg": "https://i.pinimg.com/originals/2c/a3/f1/2ca3f175ca47c5fcab60769ed888d104.jpg",
   "title": "Titulo do Quiz",
   "description": "Teste seus conhecimentos sobre o mundo mágico de Hogwards",
   "questions": [
     {
-      "image": "https://ambrosia.com.br/wp-content/uploads/2020/11/harry-potter-todos-filmes-streaming-hbo-max-noticias-revista-ambrosia.jpg",
+      "image": "https://portaltibia.com.br/wp-content/uploads/2013/02/enquete-sapatos.png",
       "title": "Pergunta 1",
-      "description": "Com Quantos anos Harry Potter foi para Hogwards ?",
+      "description": "Qual é a bota mais rápida to Tibia ?",
       "answer": 1,
       "alternatives": [
-        "10",
-        "11",
-        "12",
-        "13"
+        "Lightning Boots",
+        "Boots of Haste",
+        "Boots of Waterwalking",
+        "Oriental Shoes"
       ]
     },
     {
-      "image": "https://media.giphy.com/media/13FrpeVH09Zrb2/giphy.gif",
-      "title": "Como fazer um background gradiente com css?",
-      "description": "Faz tempo em haha",
+      "image": "https://i.ytimg.com/vi/8jmKSFBW3zY/sddefault.jpg",
+      "title": "Marque a alternativa que complete a frase",
+      "description": "Gente, Daniel Paladino na minha frente em Edron ... ",
       "answer": 0,
       "alternatives": [
-         "background: linear-gradient(#e66465, #9198e5);",
-         "background: gradient(#e66465, #9198e5);"
+         "Jogo 1 Magic Wall, Jogo 2 Magic Wall",
+         "Eu vou morrer",
+         "Johnie seu broxa"
       ]
     }
   ],
   "external": [
-    ""
+    "https://aluraquiz-css.omariosouto.vercel.app",
+    "https://aluraquiz-base.alura-challenges.vercel.app/"
   ],
   "theme": {
     "colors": {

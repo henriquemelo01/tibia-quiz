@@ -1,13 +1,13 @@
 
 import React, { useEffect } from 'react';
-import db from '../db.json';
-import QuizBackground from '../src/components/QuizBackground/index.js';
-import QuizImg from '../src/components/QuizImg/index.js';
-import QuizContainer from '../src/components/QuizContainer/index.js';
-import Widget from '../src/components/Widget/index.js';
-import Alternatives from '../src/components/QuizAlternatives/index.js';
-import BtnConfirm from '../src/components/BtnConfirmar/index.js'
-import LinkHome from '../src/components/Link/index.js'
+// import { Lottie } from '@crello/react-lottie';
+// import db from '../../../db.json';
+import QuizBackground from '../../components/QuizBackground/index.js';
+import QuizContainer from '../../components/QuizContainer/index.js';
+import Widget from '../../components/Widget/index.js';
+import Alternatives from '../../components/QuizAlternatives/index.js';
+import BtnConfirm from '../../components/BtnConfirmar/index.js'
+import LinkHome from '../../components/Link/index.js'
 import { useRouter } from 'next/router';
 
 
@@ -22,7 +22,7 @@ function QuizResult({results}) {
         <h1>Resultado</h1>
       </Widget.Header>
       <Widget.Content>
-        <h1>Mandou bem, {db.name}</h1>
+        {/* <h1>Mandou bem, {db.name}</h1> */}
         <h2>Você marcou {results.filter((x) => x).length} pontos</h2>
         <ul>
           {results.map((result,index) => <li key = {`result__${result}`}>Pergunta {index + 1}: {result === true ? "Acertou" : "Errou"}</li>)}
@@ -47,11 +47,11 @@ function Loading () {
 }
 
 
-function Quiz ({addResult, setScreenState}) {
+function Quiz ({externalQuestions, addResult, setScreenState}) {
   const [indexQuestion, setIndex] = React.useState(0);
-  const question = db.questions[indexQuestion];
+  const question = externalQuestions[indexQuestion];
   const answerIndex = question.answer;
-  const totalQuestions = db.questions.length;
+  const totalQuestions = externalQuestions.length;
   const [statusQuiz, setStatusQuiz] = React.useState("Playing"); // "Playing", Acerto , Erro 
   const [userAnswer, setUserAnswer] = React.useState(undefined); // select 
 
@@ -70,7 +70,7 @@ function Quiz ({addResult, setScreenState}) {
   return (
     <div>
         <Widget.Header>
-            <h1>Pergunta {indexQuestion + 1} de {db.questions.length}</h1>
+            <h1>Pergunta {indexQuestion + 1} de {externalQuestions.length}</h1>
         </Widget.Header>
         <img
           alt = "Descrição"
@@ -135,16 +135,16 @@ const screenStatus = {
 }
 
 
-// Renderizar Página
-export default function QuizPage() {
-    const [screenState, setScreenState] = React.useState(screenStatus.loading); // Inicio: screenStatus.loading 
+// Renderizar Página 
+
+// Recebe a props do [id].js, uma vez que a QuizPage esta sendo renderizada como um componente 
+export default function QuizPage({externalBg, externalQuestions}) {
+    const [screenState, setScreenState] = React.useState(screenStatus.loading); 
     const [results, setResult] = React.useState([]); // Array de resultados  
     const router = useRouter();
 
-    // React Hook - useEffect(callBack, [dependencias]) : A call back é executada quando uma variável muda, caso não tenha nenhuma depencia a call back só será executada uma única vez. 
     function addResult(result) {
-      // Equivalente a results.push(result) setResult(results) , entretanto quando usamos a expressao abaixo, criamos um novo results e não o modificamos
-      setResult([...results, result]) // cria um novo array inserindo todos os dados que já existiam e insere o novo resultado
+      setResult([...results, result]) 
     }
 
     React.useEffect(() => {
@@ -152,12 +152,12 @@ export default function QuizPage() {
     },[])
 
   return (
-    <QuizBackground backgroundImage={db.bg}>
+    <QuizBackground backgroundImage={externalBg}>
       <QuizContainer>
         <Widget>
             {/* Renderização Condicionada */}
             {screenState === "LOADING" && <Loading/>}
-            {screenState === "QUIZ" && <Quiz results = {results} addResult = {addResult} setScreenState = {setScreenState} />}
+            {screenState === "QUIZ" && <Quiz externalQuestions = {externalQuestions} results = {results} addResult = {addResult} setScreenState = {setScreenState} />}
             {screenState === "RESULT" && <QuizResult results = {results} />}
         </Widget>
       </QuizContainer>
@@ -165,16 +165,3 @@ export default function QuizPage() {
   );
 }
 
-// Hook: São formas que o react prove para gnt, para biblioteca e o proprio react darem acesso a informações, coisas que acontecem quando um dado é pegado pelo servidor
-
-
-// React.useState
-
-/*
- const [num,setNum] = React.useState(0), num = 0  (estado inicial)
- setNum(0) -> Muda valor da variável num + renderiza página novamente. Equivalente a setNum(value) + document.element.textContent = num
-
-*/
-
-// React.useEffect(callBack, [depencias]); //
-// Obs: {} só podemos colocar expressoes que retornam algum valor - Ex: Operador ternario, && *, Map, filter, vars..

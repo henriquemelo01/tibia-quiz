@@ -17,6 +17,7 @@ const Alternative = styled.button`
   opacity: .85;
   &:hover,
     &:focus{
+    outline: 0;
     opacity: 1;
   }
 `
@@ -41,25 +42,26 @@ const alternatives = function (question) {
 const alternatives2 = function (question,statusQuiz, correctAnswer,userAnswer) {
   const status = statusQuiz;
   return (question.alternatives.map((alternative,alternativeId) => {
+    const alternativeKey = `alternative__${alternativeId}`;
     // Index Btn para renderizar um elemento de cor diferente
     if (statusQuiz === "Playing")
-      return <Alternative id = {alternativeId} type = "submit">{alternative}</Alternative>
+      return <Alternative key = {alternativeKey} id = {alternativeId} type = "submit">{alternative}</Alternative>
     
     // correctAnswer = alternativeNum  
     if (statusQuiz === "Acerto") {
       if (userAnswer === alternativeId){
-        return <Alternative style = {{ background: "green" }} id = {alternativeId} type = "submit">{alternative}</Alternative>
+        return <Alternative style = {{ background: "#4CAF50" }} key = {alternativeKey} id = {alternativeId} type = "submit">{alternative}</Alternative>
       } else {
-        return <Alternative disabled = {true} id = {alternativeId} type = "submit">{alternative}</Alternative>
+        return <Alternative disabled = {true} key = {alternativeKey} id = {alternativeId} type = "submit">{alternative}</Alternative>
       }
     }
 
     if (statusQuiz === "Erro") {
       if (userAnswer === alternativeId){
-        return <Alternative style = {{ background: "red" }} id = {alternativeId} type = "submit">{alternative}</Alternative>
+        return <Alternative style = {{ background: "#FF5722" }} key = {alternativeKey} id = {alternativeId} type = "submit">{alternative}</Alternative>
       }
         else {
-          return <Alternative disabled = {true} id = {alternativeId} type = "submit">{alternative}</Alternative>
+          return <Alternative disabled = {true} key = {alternativeKey} id = {alternativeId} type = "submit">{alternative}</Alternative>
       }
     }
   })
