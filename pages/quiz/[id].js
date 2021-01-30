@@ -21,26 +21,32 @@ export default function QuizDaGaleraPage({dbExterno}) {
 // A função getServerSideProps monta seu html com os dados que são retornados no props : {}
 export async function getServerSideProps(context) {
       const [projectName, githubUser] = context.query.id.split("___");
-      const dbExterno = await fetch(`https://${projectName}.${githubUser}.vercel.app/api/db`)
-        .then((respostaDoServer) => {
-          if (respostaDoServer.ok) {
-            return respostaDoServer.json();
-          }
 
-          throw new Error("Falha em pegar os dados")
-        })
-        .then((respostaConvertidaEmObjeto) => respostaConvertidaEmObjeto)
-        // .catch((err) => {
-        //   console.error(err)
-        // })
+      try {
 
-        // console.log("dbExterno: ", dbExterno);
-        return {
-          props: {
-            // .getServerSide() Monta o HTML e junta com os dados que serão retornados
-            dbExterno,
-          }
-        }
+        const dbExterno = await fetch(`https://${projectName}.${githubUser}.vercel.app/api/db`)
+          .then((respostaDoServer) => {
+            if (respostaDoServer.ok) {
+              return respostaDoServer.json();
+            }
+  
+            throw new Error("Falha em pegar os dados")
+          })
+          .then((respostaConvertidaEmObjeto) => respostaConvertidaEmObjeto)
+          // .catch((err) => {
+          //   console.error(err)
+          // })
+  
+          // console.log("dbExterno: ", dbExterno);
+          return {
+            props: {
+              // .getServerSide() Monta o HTML e junta com os dados que serão retornados
+              dbExterno,
+            },
+          };
+      } catch (err) {
+        throw new Error(err);
+      }
 } 
 
 
