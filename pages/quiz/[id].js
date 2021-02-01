@@ -1,4 +1,4 @@
-import react from "React";
+import react from "react";
 import QuizScreen from "../../src/screens/Quiz";
 import { ThemeProvider } from "styled-components";
 
