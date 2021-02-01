@@ -9,6 +9,9 @@ import Footer from "../src/components/Footer/index.js"
 import { useRouter } from "next/router"
 import Input from "../src/components/Input/index.js"
 import Button from "../src/components/Button/index.js"
+import ExternalLink from "../src/components/ExternalLink";
+import { motion } from "framer-motion"; // ** lib animação 
+
 
 
 // import { delBasePath } from "next/dist/next-server/lib/router/router";
@@ -41,7 +44,19 @@ export default function Home() {
     <QuizBackground backgroundImage = {db.bg}>
       <QuizContainer>
         <QuizLogo />
-        <Widget>
+        <Widget
+          // Muda a tag do componenete Widget
+          as = {motion.section}
+          // delay: tempo após a renderização  / duration: duração da animação
+          transition = {{ delay: 0.3, duration: 0.5 }}
+          variants = {{
+            // Estados da animação
+            hidden: { opacity: 0 , y: "100%" },
+            show: { opacity: 1 , y: 0},
+          }}
+          initial = "hidden"
+          animate = "show"
+        >
           <Widget.Header>
             <h1>{db.title}</h1>
           </Widget.Header>
@@ -74,7 +89,19 @@ export default function Home() {
             </form>
           </Widget.Content>
         </Widget>
-        <Widget>
+        <Widget
+          // Muda a tag do componenete Widget
+          as = {motion.section}
+          transition = {{ delay: 0.4, duration: 0.5 }}
+          variants = {{
+            // Estados da animação
+            show: { opacity: 1 },
+            hidden: { opacity: 0 },
+          }}
+          initial = "hidden"
+          animate = "show"
+                
+        >
           <Widget.Content>
 
             <h1>Quizes da Galera</h1>
@@ -89,6 +116,8 @@ export default function Home() {
                   return (
                     <li key = {link}>
                         <Widget.Topic 
+                          // Widget.Topic renderiza como o ExternalLink
+                          as = {ExternalLink}
                           href = {`/quiz/${projectName}___${githubUser}`}
                         >
                           {`${githubUser}/${projectName}`}
@@ -97,10 +126,19 @@ export default function Home() {
                   )
                 })}
             </ul>
-      
           </Widget.Content>
         </Widget>
-        <Footer />
+        <Footer 
+          as = {motion.footer}
+          transition = {{ delay: 0.5, duration: 0.5 }}
+          variants = {{
+            // Estados da animação
+            show: { opacity: 1 },
+            hidden: { opacity: 0 },
+          }}
+          initial = "hidden"
+          animate = "show"
+        />
       </QuizContainer>
       <GitHubCorner projectUrl="https://github.com/henriquemelo01" />
     </QuizBackground>

@@ -9,7 +9,8 @@ import Alternatives from '../../components/QuizAlternatives/index.js';
 import BtnConfirm from '../../components/BtnConfirmar/index.js'
 import LinkHome from '../../components/Link/index.js'
 import { useRouter } from 'next/router';
-
+import BackLinkArrow from "../../components/BackLinkArrow";
+import LoadingPage from '../../components/Loading/index.js'
 
 
 function QuizResult({results}) {
@@ -37,10 +38,10 @@ function Loading () {
   return (
     <div>
       <Widget.Header>
-        <h1>Loading...</h1>
+        <h1 style = {{fontSize: "22px"}}>Loading...</h1>
       </Widget.Header>
       <Widget.Content>
-        <p> LOADING -|- </p>
+        <LoadingPage/>
       </Widget.Content>
     </div>
   )
@@ -70,7 +71,8 @@ function Quiz ({externalQuestions, addResult, setScreenState}) {
   return (
     <div>
         <Widget.Header>
-            <h1>Pergunta {indexQuestion + 1} de {externalQuestions.length}</h1>
+            <BackLinkArrow href = "/" />
+            <h3>Pergunta {indexQuestion + 1} de {externalQuestions.length}</h3>
         </Widget.Header>
         <img
           alt = "Descrição"
@@ -148,7 +150,7 @@ export default function QuizPage({externalBg, externalQuestions}) {
     }
 
     React.useEffect(() => {
-      setTimeout(() => setScreenState(screenStatus.quiz), 1100);
+      setTimeout(() => setScreenState(screenStatus.quiz), 4000);
     },[])
 
   return (

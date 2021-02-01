@@ -9,21 +9,72 @@ import Alternatives from '../src/components/QuizAlternatives/index.js';
 import BtnConfirm from '../src/components/BtnConfirmar/index.js'
 import LinkHome from '../src/components/Link/index.js'
 import { useRouter } from 'next/router';
+import LoadingPage from "../src/components/Loading/index.js"
+import { motion } from "framer-motion";
+
+
+function ImgResult ({alt, src}) {
+  return (
+    <img 
+    src = {src}
+    alt = {alt}
+    style = {{
+      width: "100%",
+      height: "180px",
+      objectFit: "cover",
+    }}
+    />
+  )
+}
+
+function IconResult () {
+  return (
+    <img src ="https://png.pngtree.com/png-vector/20190724/ourmid/pngtree-false-free-png-png-image_1589434.jpg" style = {{width: "25px", display: 'inline-block', height: "100%"}}/>
+
+  )
+}
 
 
 
 function QuizResult({results}) {
 
   const router = useRouter();
+  const points = results.filter((x) => x).length;
 
   return (
     <div>
-      <Widget.Header>
+      <Widget.Header
+          as = {motion.header}
+          // delay: tempo após a renderização  / duration: duração da animação
+          transition = {{ delay: 0.3, duration: 0.5 }}
+          variants = {{
+            // Estados da animação
+            hidden: { opacity: 0 , y: "100%" },
+            show: { opacity: 1 , y: 0},
+          }}
+          initial = "hidden"
+          animate = "show"      
+      >
         <h1>Resultado</h1>
       </Widget.Header>
-      <Widget.Content>
-        <h1>Mandou bem, {db.name}</h1>
-        <h2>Você marcou {results.filter((x) => x).length} pontos</h2>
+      <Widget.Content 
+          as = {motion.div}
+          // delay: tempo após a renderização  / duration: duração da animação
+          transition = {{ delay: 0.2, duration: 0.5 }}
+          variants = {{
+            // Estados da animação
+            hidden: { opacity: 0 , y: "100%" },
+            show: { opacity: 1 , y: 0},
+          }}
+          initial = "hidden"
+          animate = "show"      
+      > 
+
+        {points < 3 && <ImgResult alt = "Bronze Medal" src = {db.resultImg.bronzeMedal} />}
+        {points >= 3 && points < 5 && <ImgResult alt = "Silver Medal" src = {db.resultImg.silverMedal} />}
+        {points >= 6 && <ImgResult alt = "Gold Medal" src = {db.resultImg.goldMedal} />}
+  
+        <h2 style = {{marginTop : "20px"}}>Você marcou {points} pontos</h2>
         <ul>
           {results.map((result,index) => <li key = {`result__${result}`}>Pergunta {index + 1}: {result === true ? "Acertou" : "Errou"}</li>)}
         </ul>
@@ -37,10 +88,10 @@ function Loading () {
   return (
     <div>
       <Widget.Header>
-        <h1>Loading...</h1>
+        <h1 style = {{fontSize: "22px"}}>Loading...</h1>
       </Widget.Header>
       <Widget.Content>
-        <p> LOADING -|- </p>
+        <LoadingPage/>
       </Widget.Content>
     </div>
   )
@@ -148,7 +199,7 @@ export default function QuizPage() {
     }
 
     React.useEffect(() => {
-      setTimeout(() => setScreenState(screenStatus.quiz), 1100);
+      setTimeout(() => setScreenState(screenStatus.quiz), 3500);
     },[])
 
   return (

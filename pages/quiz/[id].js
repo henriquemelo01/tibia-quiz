@@ -2,6 +2,7 @@ import react from "React";
 import QuizScreen from "../../src/screens/Quiz";
 import { ThemeProvider } from "styled-components";
 
+
 // Next: Resolve problemas de roteamento - Paginas Dinâmicas, server side rendering , páginas estáticas 
 
 // Pagina QuizExterna
